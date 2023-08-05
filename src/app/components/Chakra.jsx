@@ -4,7 +4,6 @@ import dynamic from "next/dynamic";
 const ChakraProvider = dynamic(() => import("@chakra-ui/react").then(
   (mod) => mod.ChakraProvider)
 );
-import React from 'react'
 
 const Chakra = ({ children }) => {
   return (

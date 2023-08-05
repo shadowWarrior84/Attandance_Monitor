@@ -7,6 +7,7 @@ const MenuProvider = ({children}) => {
     // localStorage.setItem("state", "dashboard")
     // const [active, setActive] = useState(localStorage.getItem("state"))
     const [active, setActive] = useState("dashboard")
+    const [theme,setTheme] = useState("light")
 
     const toggle = () => {
         // setActive((prev) => !prev)

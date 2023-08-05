@@ -1,5 +1,5 @@
 import { Avatar, Box, Button, Menu, MenuButton, MenuItem, MenuList, Text } from '@chakra-ui/react'
-// import { FiChevronDown } from "react-icons/fi"
+import { FiChevronDown } from "react-icons/fi"
 // import { BsBellFill } from "react-icons/bs"
 import BurgerMenu from '../../imp/burgerMenu/BurgerMenu'
 
@@ -15,9 +15,10 @@ const AppBar = () => {
         <div>
 
         
-            {/* <Menu>
+            {/* <Menu id="menu" isLazy> 
+                
                 <MenuButton as={Button} rightIcon={<FiChevronDown />}>
-                    <Avatar size={"sm"} cursor={"pointer"} name={"abcd"} src={"./placeholder.jpg"}/>
+                    <Avatar size={"sm"} cursor={"pointer"} name={"abcd"} src={""}/>
                 </MenuButton>
                 <MenuList>
                     <MenuItem mt={2}>Download</MenuItem>

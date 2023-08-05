@@ -5,7 +5,7 @@ import { sideBarData } from '../../components/hero/components/sideBarData'
 const SideBar = () => {
   return (
     <>
-        <GridItem rowSpan={2} colSpan={1} bgColor='	#FAF9F6' h={"full"} >
+        <GridItem rowSpan={2} colSpan={1} bgColor='	#FAF9F6' h={"full"}  >
         <Box>
           <Heading as='h4' size='md' p={6} color={"purple.500"} textAlign={"center"}>
             Admin Panel

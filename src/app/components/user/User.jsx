@@ -21,7 +21,7 @@ const page = () => {
         <AppBar/>
         <UserInfo/>
       </GridItem>
-      <GridItem colSpan={{base: 5, md: 4}} bg='#FAF9F6' h={"57vh"} overflowY={"scroll"} sx={{'::-webkit-scrollbar':{display:'none'}}}>
+      <GridItem colSpan={{base: 5, md: 4}} bg='#FAF9F6' h={"57vh"} overflowY={"scroll"} sx={{'::-webkit-scrollbar':{display:'none'}}} >
         <UserField/>  
       </GridItem>
     </Grid>
