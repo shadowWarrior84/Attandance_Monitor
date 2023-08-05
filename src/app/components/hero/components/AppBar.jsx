@@ -1,9 +1,11 @@
-import { Avatar, Box, Button, Menu, MenuButton, MenuItem, MenuList, Text } from '@chakra-ui/react'
+import { Avatar, Box, Button, Menu, MenuButton, MenuItem, MenuList, Text, useColorMode } from '@chakra-ui/react'
 import { FiChevronDown } from "react-icons/fi"
 // import { BsBellFill } from "react-icons/bs"
 import BurgerMenu from '../../imp/burgerMenu/BurgerMenu'
+import { MdLightMode, MdNightlight } from 'react-icons/md'
 
 const AppBar = () => {
+  const { colorMode, toggleColorMode } = useColorMode()
   return (
     <Box display={"flex"} justifyContent={"space-between"} alignItems={"center"} bg={""} w={"100%"} p={"5px 5px 5px 5px"}>
         <Box display={{base: "flex", md: "none"}}>
@@ -13,7 +15,9 @@ const AppBar = () => {
           Dashboard
         </Text>
         <div>
-
+        <Button  onClick={toggleColorMode}>
+          {colorMode === 'light' ? <MdNightlight/> : <MdLightMode/>}
+        </Button>
         
             {/* <Menu id="menu" isLazy> 
                 

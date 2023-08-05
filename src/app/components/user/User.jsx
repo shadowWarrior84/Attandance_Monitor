@@ -1,5 +1,5 @@
 "use client"
-import { Grid, GridItem } from '@chakra-ui/react'
+import { Button, Grid, GridItem } from '@chakra-ui/react'
 import React from 'react'
 import SideBar from '../imp/SideBar'
 import UserInfo from './components/UserInfo'
@@ -17,11 +17,11 @@ const page = () => {
       <GridItem rowSpan={2} colSpan={1} display={{base: "none", md: "grid"}} >
         <SideBar/>
       </GridItem>
-      <GridItem colSpan={{base: 5, md: 4}} bg='#FAF9F6' h={"40vh"} >
+      <GridItem colSpan={{base: 5, md: 4}} h={"40vh"} >
         <AppBar/>
         <UserInfo/>
       </GridItem>
-      <GridItem colSpan={{base: 5, md: 4}} bg='#FAF9F6' h={"57vh"} overflowY={"scroll"} sx={{'::-webkit-scrollbar':{display:'none'}}} >
+      <GridItem colSpan={{base: 5, md: 4}}  h={"57vh"} overflowY={"scroll"} sx={{'::-webkit-scrollbar':{display:'none'}}} >
         <UserField/>  
       </GridItem>
     </Grid>
