@@ -1,4 +1,6 @@
 import { Button, FormControl, FormLabel, Input, InputGroup, InputRightElement, VStack, useToast } from '@chakra-ui/react'
+import axios from 'axios'
+import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 
 const Login = () => {
@@ -7,10 +9,25 @@ const Login = () => {
     const [email, setEmail] = useState()
     const [password, setPassword] = useState()
     const [loading, setLoading] = useState(false)
+
+    const router = useRouter()
   
     const toast = useToast()
   
     const handleClick = () => setShow(!show)
+
+    const handleSubmit = async () => {
+        const data = {
+            email: email,
+            password: password
+        }
+
+        const result = await axios.post("http://localhost:3000/api/auth/login", data)
+
+        if(result.data.success) {
+            router.push("/dashboard")
+        }
+    }
 
     return (
         <VStack spacing={'5px'} color={"black"} >
@@ -30,7 +47,7 @@ const Login = () => {
                 </InputGroup>
             </FormControl>
 
-            <Button colorScheme='blue' width={"100%"} style={{ marginTop: 15 }} isLoading={loading}>
+            <Button colorScheme='blue' width={"100%"} style={{ marginTop: 15 }} isLoading={loading} onClick={handleSubmit}>
                 Login
             </Button>
             
