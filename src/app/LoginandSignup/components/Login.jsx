@@ -13,8 +13,8 @@ const Login = () => {
     const handleClick = () => setShow(!show)
 
     return (
-        <VStack spacing={'5px'} color={"black"}>
-            <FormControl id='emailLogin' isRequired>
+        <VStack spacing={'5px'} color={"black"} >
+            <FormControl id='emailLogin' isRequired >
                 <FormLabel>Email</FormLabel>
                 <Input placeholder='Enter Your Email' value={email} onChange={(e) => { setEmail(e.target.value) }} />
             </FormControl>

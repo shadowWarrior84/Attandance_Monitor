@@ -3,7 +3,7 @@ import TableElement from './TableElement'
 
 const SideBox = () => {
   return (
-    <Box display={"flex"} flexDir={"column"} justifyContent={"space-around"} p={4} bgColor={"white"} h={"67vh"}>
+    <Box display={"flex"} flexDir={"column"} justifyContent={"space-around"} p={4} h={"67vh"}>
         <Box rounded={"2xl"} boxShadow={"2xl"} marginBottom={4}>
             <TableElement/>
         </Box>
