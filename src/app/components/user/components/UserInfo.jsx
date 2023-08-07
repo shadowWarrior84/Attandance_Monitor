@@ -1,6 +1,11 @@
+import { MenuContext } from '@/app/context/MenuContext'
 import { Avatar, Box, Heading, Highlight, List, ListItem } from '@chakra-ui/react'
+import { useContext } from 'react'
 
 const UserInfo = () => {
+
+    const { user } = useContext(MenuContext)
+
   return (
     <Box display={"flex"} justifyContent={"space-around"}>
         <Box display={"flex"} justifyContent={"center"} alignItems={"center"}>
@@ -16,10 +21,10 @@ const UserInfo = () => {
             </Highlight>
             <List mt={4} spacing={2} fontSize={"md"} fontWeight={"600"} color={"#71797E"}>
                 <ListItem>
-                    Name: John Doe
+                    Name: {user?.name}
                 </ListItem>
                 <ListItem>
-                    Email: JohnDoe@gmail.com
+                    Email: {user?.email}
                 </ListItem>
                 <ListItem>
                     Branch: Electrical Engineering

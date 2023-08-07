@@ -1,5 +1,5 @@
 "use client"
-const { createContext, useState} = require("react");
+const { createContext, useState, useEffect} = require("react");
 
 export const MenuContext = createContext()
 
@@ -7,6 +7,7 @@ const MenuProvider = ({children}) => {
     // localStorage.setItem("state", "dashboard")
     // const [active, setActive] = useState(localStorage.getItem("state"))
     const [active, setActive] = useState("dashboard")
+    const [user, setUser] = useState()
     const [theme,setTheme] = useState("light")
 
     const toggle = () => {
@@ -14,8 +15,15 @@ const MenuProvider = ({children}) => {
         // localStorage.setItem("state", `${active}`)
     }
 
+    useEffect(()=>{
+        const userInfo = JSON.parse(localStorage.getItem("userInfo"))
+        setUser(userInfo)
+    },[])
+
+
+
     return (
-        <MenuContext.Provider value={{active, setActive, toggle}}>
+        <MenuContext.Provider value={{user, active, setActive, toggle}}>
             {children}
         </MenuContext.Provider>
     )

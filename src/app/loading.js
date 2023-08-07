@@ -1,7 +1,10 @@
+import Loading from "./components/loading/Loading"
 
 const loading = () => {
   return (
-    <div>loading</div>
+    <div>
+      <Loading/>
+    </div>
   )
 }
 

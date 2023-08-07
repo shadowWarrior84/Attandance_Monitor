@@ -1,5 +1,5 @@
 import { Box } from '@chakra-ui/react'
-import { Area, AreaChart, CartesianGrid, Legend, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts'
+import { Area, AreaChart, Bar, BarChart, CartesianGrid, Legend, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts'
 
 const data = [
   {
@@ -49,7 +49,29 @@ const data = [
 const ChartItem = () => {
   return (
     <Box h={"94%"} boxShadow={"2xl"} rounded={"2xl"} width={"95%"} mt={4} ml={4} >
-      <ResponsiveContainer width="100%" aspect={8 / 5}>
+
+      <ResponsiveContainer width="100%" aspect={8/5}>
+        <BarChart
+          width={500}
+          height={300}
+          data={data}
+          margin={{
+            top: 5,
+            right: 30,
+            left: 20,
+            bottom: 5,
+          }}
+        >
+          <CartesianGrid strokeDasharray="3 3" />
+          <XAxis dataKey="name" />
+          <YAxis />
+          <Tooltip />
+          <Legend />
+          <Bar dataKey="pv" fill="#8884d8" />
+          <Bar dataKey="uv" fill="#82ca9d" />
+        </BarChart>
+      </ResponsiveContainer>
+      {/* <ResponsiveContainer width="100%" aspect={8 / 5}>
 
         <AreaChart width={"300"} height={"400"} data={data}
           margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
@@ -70,7 +92,7 @@ const ChartItem = () => {
           <Area type="monotone" dataKey="uv" stroke="#8884d8" fillOpacity={1} fill="url(#colorUv)" />
           <Area type="monotone" dataKey="pv" stroke="#82ca9d" fillOpacity={1} fill="url(#colorPv)" />
         </AreaChart>
-      </ResponsiveContainer>
+      </ResponsiveContainer> */}
 
 
       {/* <ResponsiveContainer width="100%" aspect={8/5}>

@@ -17,16 +17,55 @@ const Login = () => {
     const handleClick = () => setShow(!show)
 
     const handleSubmit = async () => {
-        const data = {
-            email: email,
-            password: password
+
+        setLoading(true)
+        if(!email || !password) {
+            toast({
+                title: "Please Fill all the Fields",
+                status: "warning",
+                duration: 5000,
+                isClosable: true,
+                position: "bottom"
+              })
+              setLoading(false)
+              return
         }
 
-        const result = await axios.post("http://localhost:3000/api/auth/login", data)
+        try {
+            
+            const data = {
+                email: email,
+                password: password
+            }
+    
+            const result = await axios.post("http://localhost:3000/api/auth/login", data)
 
-        if(result.data.success) {
-            router.push("/dashboard")
+            console.log(result.data.user)
+ 
+            localStorage.setItem("userInfo", JSON.stringify(result.data.user))
+            
+            if(result.data.success) {
+                toast({
+                    title: "Login Successfull",
+                    status: "success",
+                    duration: 5000,
+                    isClosable: true,
+                    position: "bottom"
+                  })
+                router.push("/dashboard")
+            }
+        } catch (error) {
+            toast({
+                title: "Error Occured",
+                status: "error",
+                duration: 5000,
+                isClosable: true,
+                position: "bottom"
+              })
+              console.log(error)
+              setLoading(false)
         }
+
     }
 
     return (

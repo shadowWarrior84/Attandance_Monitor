@@ -11,8 +11,6 @@ export async function POST(req) {
 
     try {
 
-        let response = NextResponse.json({success: true}, {status: 200})
-
         const body = await req.json()
 
         const { email, password } = body
@@ -28,6 +26,10 @@ export async function POST(req) {
         if (!verifyPassword) {
             return NextResponse.json({ password: verifyPassword, error: "Invalid password" })
         }
+
+        delete userExists._doc.password
+
+        let response = NextResponse.json({success: true, user: userExists}, {status: 200})
 
         const iat = Math.floor(Date.now() / 1000);
         const exp = iat + 60* 60; // one hour
