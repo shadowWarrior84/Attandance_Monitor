@@ -40,7 +40,7 @@ const Login = () => {
     
             const result = await axios.post("http://localhost:3000/api/auth/login", data)
 
-            console.log(result.data.user)
+            // console.log(result.data.user)
  
             localStorage.setItem("userInfo", JSON.stringify(result.data.user))
             

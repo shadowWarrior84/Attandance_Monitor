@@ -1,4 +1,4 @@
-import { Button, useDisclosure } from '@chakra-ui/react'
+import { Button, useColorModeValue, useDisclosure } from '@chakra-ui/react'
 import {
     Drawer,
     DrawerBody,
@@ -16,7 +16,7 @@ const BurgerMenu = () => {
     return (
         <>
             <Button colorScheme='#C5C6D0' onClick={onOpen}>
-                <BsMenuButtonWide color='black' />
+                <BsMenuButtonWide color={useColorModeValue("black", "white")} />
             </Button>
             <Drawer
                 isOpen={isOpen}
