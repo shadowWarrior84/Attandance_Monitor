@@ -8,19 +8,24 @@ import { useRouter } from 'next/navigation'
 
 const ListNew = ({title, icon, link}) => {
   
-  const { active, setActive, toggle }  = useContext(MenuContext)
+  const { active, setActive, toggle, setUser, setOn }  = useContext(MenuContext)
+  // const { active, setActive, toggle, setUser, setOn }  = useContext(UserContext)
 
   const router = useRouter()  
 
   const handleClick = () => {
-    if(!title === "Logout"){
+    if( title !== "Logout"){
       setActive(title.toLowerCase())
     }
     // toggle()
     if( title === "Logout"){
       axios.post("http://localhost:3000/api/auth/logout")
       localStorage.removeItem("userInfo")
+      setUser({})
+      setOn(false)
+      setActive("dashboard")
       router.push("/")
+      router.refresh()
     }
   }
  

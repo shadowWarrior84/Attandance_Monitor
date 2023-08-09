@@ -7,7 +7,7 @@ import User from "@/app/api/models/userModel"
 
 export async function POST(req) {
 
-    dbConnect()
+    await dbConnect()
 
     try {
 

@@ -1,7 +1,8 @@
+import { MenuContext } from '@/app/context/MenuContext'
 import { Button, FormControl, FormLabel, Input, InputGroup, InputRightElement, VStack, useToast } from '@chakra-ui/react'
 import axios from 'axios'
 import { useRouter } from 'next/navigation'
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 
 const Login = () => {
 
@@ -9,6 +10,8 @@ const Login = () => {
     const [email, setEmail] = useState()
     const [password, setPassword] = useState()
     const [loading, setLoading] = useState(false)
+
+    const { setOn } = useContext(MenuContext)
 
     const router = useRouter()
   
@@ -37,14 +40,20 @@ const Login = () => {
                 email: email,
                 password: password
             }
+
+            
     
             const result = await axios.post("http://localhost:3000/api/auth/login", data)
 
             // console.log(result.data.user)
  
-            localStorage.setItem("userInfo", JSON.stringify(result.data.user))
             
             if(result.data.success) {
+
+                localStorage.setItem("userInfo", JSON.stringify(result.data.user))
+
+                setOn(true)
+
                 toast({
                     title: "Login Successfull",
                     status: "success",
@@ -53,7 +62,18 @@ const Login = () => {
                     position: "bottom"
                   })
                 router.push("/dashboard")
+                router.refresh()
+            } else {
+                toast({
+                    title: "Invalid email or password",
+                    status: "error",
+                    duration: 5000,
+                    isClosable: true,
+                    position: "bottom"
+                  })
+                  setLoading(false)
             }
+            
         } catch (error) {
             toast({
                 title: "Error Occured",
@@ -62,7 +82,7 @@ const Login = () => {
                 isClosable: true,
                 position: "bottom"
               })
-              console.log(error)
+            //   console.log(error)
               setLoading(false)
         }
 

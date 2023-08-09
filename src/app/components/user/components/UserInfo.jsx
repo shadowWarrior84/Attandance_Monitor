@@ -6,6 +6,8 @@ const UserInfo = () => {
 
     const { user } = useContext(MenuContext)
 
+    // console.log(user?.name)
+
   return (
     <Box display={"flex"} justifyContent={"space-around"}>
         <Box display={"flex"} justifyContent={"center"} alignItems={"center"}>
@@ -17,7 +19,7 @@ const UserInfo = () => {
                 query=''
                 styles={{ px: '2', py: '1', rounded: 'full', bg: 'purple.500' }}
             >
-                John Doe
+                {user?.name || "John Doe"}
             </Highlight>
             <List mt={4} spacing={2} fontSize={"md"} fontWeight={"600"} color={"#71797E"}>
                 <ListItem>

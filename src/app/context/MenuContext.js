@@ -9,21 +9,22 @@ const MenuProvider = ({children}) => {
     const [active, setActive] = useState("dashboard")
     const [user, setUser] = useState()
     const [theme,setTheme] = useState("light")
+    const [on,setOn] = useState(false)
 
     const toggle = () => {
         // setActive((prev) => !prev)
         // localStorage.setItem("state", `${active}`)
     }
-
     useEffect(()=>{
-        const userInfo = JSON.parse(localStorage.getItem("userInfo"))
+        const userInfo = JSON.parse(localStorage.getItem("userInfo"))  
         setUser(userInfo)
-    },[])
+    },[on])
+
 
 
 
     return (
-        <MenuContext.Provider value={{user, active, setActive, toggle}}>
+        <MenuContext.Provider value={{user, active, setActive, toggle, setOn, setUser}}>
             {children}
         </MenuContext.Provider>
     )
