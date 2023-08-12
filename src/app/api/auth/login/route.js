@@ -34,7 +34,7 @@ export async function POST(req) {
         const iat = Math.floor(Date.now() / 1000);
         const exp = iat + 60* 60; // one hour
 
-        const token = await new SignJWT({}).setProtectedHeader({ alg: "HS256" })
+        const token = await new SignJWT({userExists}).setProtectedHeader({ alg: "HS256" })
             .setIssuedAt(iat)
             .setExpirationTime(exp)
             .setNotBefore(iat)

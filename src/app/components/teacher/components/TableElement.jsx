@@ -15,9 +15,16 @@ import {
 import { GiTeacher } from 'react-icons/gi'
 import UpdateModal from './UpdateModal'
 import UpdateClass from './UpdateClass'
+import axios from 'axios'
 
-const TableElement = () => {
-    const { isOpen, onOpen, onClose } = useDisclosure()
+
+const TableElement = async () => {
+    // const { isOpen, onOpen, onClose } = useDisclosure()
+
+    const res = await getData()
+
+    console.log(res)
+
     return (
         <Box p={8}>
             <Heading textAlign={"center"} color={"#6082B6"}>Classes Per Teacher</Heading>
@@ -33,7 +40,15 @@ const TableElement = () => {
                             </Tr>
                         </Thead>
                         <Tbody>
-                            <Tr>
+                            {res && res?.map((data, i) => (
+
+                                <Tr key={i}>
+                                    <Td>{data.name}</Td>
+                                    <Td>4</Td>
+                                    <Td isNumeric>4</Td>
+                                </Tr>
+                            ))}
+                            {/* <Tr>
                                 <Td>JCB</Td>
                                 <Td>4</Td>
                                 <Td isNumeric>4</Td>
@@ -72,7 +87,7 @@ const TableElement = () => {
                                 <Td>AB(OE)</Td>
                                 <Td>4</Td>
                                 <Td isNumeric>4</Td>
-                            </Tr>
+                            </Tr> */}
                         </Tbody>
                         <Tfoot>
                             <Tr>
@@ -86,14 +101,29 @@ const TableElement = () => {
             </Box>
             <Box display={"flex"} justifyContent={"space-around"} mt={8}>
                 <Box>
-                    <UpdateModal isOpen={isOpen} onOpen={onOpen} onClose={onClose}/>
+                    <UpdateModal res={res} />
                 </Box>
                 <Box>
-                    <UpdateClass/>
+                    <UpdateClass />
                 </Box>
             </Box>
         </Box>
     )
+}
+
+export async function getData() {
+
+    try {
+
+        const res = await axios.get("http://localhost:3000/api/user/teacher/getTeacher")
+
+        //  const data = "hello"
+
+        return res.data
+
+    } catch (error) {
+
+    }
 }
 
 export default TableElement

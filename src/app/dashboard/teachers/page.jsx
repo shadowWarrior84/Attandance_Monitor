@@ -1,9 +1,15 @@
 import Teacher from '@/app/components/teacher/Teacher'
+// import axios from 'axios'
 
-const teacher = () => {
+import TeacherClient from "@/app/components/teacher/TeacherClient"
+
+const Page = async () => {
+
   return (
-    <Teacher/>
+    // <TeacherClient/>
+    <Teacher />
   )
 }
 
-export default teacher
+
+export default Page

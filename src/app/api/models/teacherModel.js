@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const teacherSchema = new mongoose.Schema({
     id: {
-        type: mongoose.Types.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         ref: "users"
     },
     name: {
@@ -13,14 +13,14 @@ const teacherSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    classHeld: {
-        type: String,
+    classAttend: {
+        type: Number,
         required: true
     },
     totalClass: {
-        type: String,
+        type: Number,
         required: true
     }
-}, {timestamps: true})
+}, {timestamps: true}, {strict: false})
 
-export default mongoose.model.Teacher || mongoose.model("Teacher", teacherSchema)
+export default mongoose.models.Teacher || mongoose.model("Teacher", teacherSchema)
