@@ -1,15 +1,92 @@
 import { MenuContext } from '@/app/context/MenuContext'
-import { Box, Button, FormControl, FormLabel, Heading, Input, List, ListItem, useColorModeValue } from '@chakra-ui/react'
+import { Box, Button, FormControl, FormLabel, Heading, Input, List, ListItem, useColorModeValue, useToast } from '@chakra-ui/react'
+import axios from 'axios'
 import { useContext, useState } from 'react'
 import { GrUpdate } from "react-icons/gr"
 
 const UserField = () => {
-    const { user } = useContext(MenuContext)
+    const { user, setOn } = useContext(MenuContext)
     const [name, setName] = useState(user?.name)
     const [email, setEmail] = useState(user?.email)
     const [branch, setBranch] = useState("Electrical Engineering")
     const [course, setCourse] = useState("B.Tech")
     const [semester, setSemester] = useState(5)
+    const [loading, setLoading] = useState(false)
+    const toast = useToast()
+
+    const handleSubmit = async () => {
+
+        setLoading(true)
+        // if(!email || !password) {
+        //     toast({
+        //         title: "Please Fill all the Fields",
+        //         status: "warning",
+        //         duration: 5000,
+        //         isClosable: true,
+        //         position: "bottom"
+        //       })
+        //       setLoading(false)
+        //       return
+        // }
+
+        try {
+            
+            const data = {
+                userId: user?._id,
+                name: name,
+                email: email
+            }
+
+            
+    
+            const result = await axios.patch("http://localhost:3000/api/user/updateInfo", data)
+
+            // console.log(result.data.user)
+ 
+            
+            if(result.data.success) {
+
+                localStorage.removeItem("userInfo")
+
+                localStorage.setItem("userInfo", JSON.stringify(result.data.updateData))
+
+                setOn(true)
+
+                toast({
+                    title: "Data updated successfully",
+                    status: "success",
+                    duration: 5000,
+                    isClosable: true,
+                    position: "bottom"
+                  })
+
+                  setLoading(false)
+            
+            } else {
+                toast({
+                    title: "Invalid email or password",
+                    status: "error",
+                    duration: 5000,
+                    isClosable: true,
+                    position: "bottom"
+                  })
+                  setLoading(false)
+            }
+            
+        } catch (error) {
+            console.log(error)
+            toast({
+                title: "Error Occured",
+                status: "error",
+                duration: 5000,
+                isClosable: true,
+                position: "bottom"
+              })
+            //   console.log(error)
+              setLoading(false)
+        }
+
+    }
 
 
     return (
@@ -82,7 +159,7 @@ const UserField = () => {
                         <ListItem>
                         </ListItem>
                         <Box mb={4} display={"flex"} justifyContent={"center"} alignItems={"center"}>
-                            <Button leftIcon={<GrUpdate />} colorScheme='purple' variant='solid'>
+                            <Button leftIcon={<GrUpdate />} colorScheme='purple' variant='solid' onClick={handleSubmit} isLoading={loading}>
                                 Update
                             </Button>
                         </Box>

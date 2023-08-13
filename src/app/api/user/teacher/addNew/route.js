@@ -53,7 +53,7 @@ export async function POST(req) {
             totalClass: totalClass
         })
 
-        return NextResponse.json(newTeacher, { status: 200 })
+        return NextResponse.json({success: true}, { status: 200 })
 
     } catch (error) {
         return new NextResponse(error, { status: 500 })

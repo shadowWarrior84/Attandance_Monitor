@@ -13,13 +13,18 @@ import { MdTipsAndUpdates } from "react-icons/md"
 import { ImCheckboxChecked } from "react-icons/im"
 
 import { classesData } from "./classesData"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { BsFillArrowDownSquareFill, BsFillArrowUpSquareFill } from "react-icons/bs"
 
-const TableHelper = ({ teacher, held, total }) => {
+const TableHelper = ({change, id, teacher, held, total }) => {
 
     const [hClass, setHClass] = useState(held)
     const [tClass, setTClass] = useState(total)
+
+    const handleClick = (id) => {
+        change.push(id)
+        console.log(change)
+    }
 
     return (
         <Tr>
@@ -27,7 +32,7 @@ const TableHelper = ({ teacher, held, total }) => {
             <Td>
                 <Box display={"flex"} >
                     <Box>
-                        <Button  boxSize={8} leftIcon={<BsFillArrowUpSquareFill />} colorScheme='teal' variant='solid' onClick={() => setHClass(hClass + 1)}/>
+                        <Button  boxSize={8} leftIcon={<BsFillArrowUpSquareFill />} colorScheme='teal' variant='solid' onClick={() => (setHClass(hClass + 1), handleClick(id))}/>
                         {/* <BsFillArrowUpSquareFill color="green" size={30} onClick={() => setHClass(hClass + 1)} /> */}
                     </Box>
                     <Box ml={2} mr={2}>
@@ -64,9 +69,22 @@ const TableHelper = ({ teacher, held, total }) => {
     )
 }
 
-const UpdateClass = () => {
+const UpdateClass = ({updateEleTeacher}) => {
 
     const { isOpen, onOpen, onClose } = useDisclosure()
+
+
+    const [data,setData] = useState(updateEleTeacher)
+
+    const change = []
+
+    useEffect(()=>{
+        setData(updateEleTeacher)
+    },[updateEleTeacher])
+
+    const handleSubmit = async() => {
+
+    }
 
     return (
         <>
@@ -88,9 +106,12 @@ const UpdateClass = () => {
                                     </Tr>
                                 </Thead>
                                 <Tbody>
-                                    {classesData.map((data, i) => (
-                                        <TableHelper key={i} teacher={data.Teacher} held={data.classesHeld} total={data.totalClass} />
+                                    {data?.map((data, i) => (
+                                        <TableHelper key={i} change={change} id={data._id} teacher={data.name} held={data.classAttend} total={data.totalClass} />
                                     ))}
+                                    {/* {classesData.map((data, i) => (
+                                        <TableHelper key={i} teacher={data.Teacher} held={data.classesHeld} total={data.totalClass} />
+                                    ))} */}
                                 </Tbody>
                             </Table>
                         </TableContainer>
@@ -98,7 +119,7 @@ const UpdateClass = () => {
                     </ModalBody>
 
                     <ModalFooter>
-                        <Button leftIcon={<ImCheckboxChecked />} colorScheme='whatsapp' mr={4}>Update</Button>
+                        <Button leftIcon={<ImCheckboxChecked />} colorScheme='whatsapp' mr={4} onClick={handleSubmit}>Update</Button>
                         <Button colorScheme='blue' mr={3} onClick={onClose}>
                             Close
                         </Button>

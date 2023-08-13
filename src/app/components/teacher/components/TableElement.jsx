@@ -16,14 +16,26 @@ import { GiTeacher } from 'react-icons/gi'
 import UpdateModal from './UpdateModal'
 import UpdateClass from './UpdateClass'
 import axios from 'axios'
+import { useEffect, useState } from 'react'
 
 
-const TableElement = async () => {
+const TableElement = () => {
     // const { isOpen, onOpen, onClose } = useDisclosure()
 
-    const res = await getData()
+    let res
+    const [updateEleTeacher,setUpdateEleTeacher] = useState()
+    useEffect(()=>{
+        const fetchData = async() => {
+            res = await getData()
+            setUpdateEleTeacher(res)
+        }
+        fetchData()
+    },[])
 
-    console.log(res)
+
+
+
+    // console.log(res)
 
     return (
         <Box p={8}>
@@ -40,14 +52,23 @@ const TableElement = async () => {
                             </Tr>
                         </Thead>
                         <Tbody>
-                            {res && res?.map((data, i) => (
+
+                            {updateEleTeacher && updateEleTeacher?.map((data, i) => (
+
+                                <Tr key={i}>
+                                    <Td>{data.name}</Td>
+                                    <Td>{data.classAttend}</Td>
+                                    <Td isNumeric>{data.totalClass}</Td>
+                                </Tr>
+                            ))}
+                            {/* {res && res?.map((data, i) => (
 
                                 <Tr key={i}>
                                     <Td>{data.name}</Td>
                                     <Td>4</Td>
                                     <Td isNumeric>4</Td>
                                 </Tr>
-                            ))}
+                            ))} */}
                             {/* <Tr>
                                 <Td>JCB</Td>
                                 <Td>4</Td>
@@ -101,10 +122,10 @@ const TableElement = async () => {
             </Box>
             <Box display={"flex"} justifyContent={"space-around"} mt={8}>
                 <Box>
-                    <UpdateModal res={res} />
+                    <UpdateModal res={res} updateEleTeacher={updateEleTeacher} setUpdateEleTeacher={setUpdateEleTeacher} />
                 </Box>
                 <Box>
-                    <UpdateClass />
+                    <UpdateClass updateEleTeacher={updateEleTeacher} />
                 </Box>
             </Box>
         </Box>

@@ -3,10 +3,12 @@ import { Grid, GridItem } from '@chakra-ui/react'
 // import SideBar from '../imp/SideBar'
 import TableElement from './components/TableElement'
 import AppBar from '../hero/components/AppBar'
+import { useState } from 'react'
 
 
 
 const Teacher = () => {
+
   return (
     // <Grid
     // h='100vh'
@@ -19,7 +21,7 @@ const Teacher = () => {
     //   </GridItem>
       <GridItem colSpan={{base: 5, md: 4}} rowSpan={2}  >
         <AppBar/>
-        <TableElement/>
+        <TableElement />
       </GridItem>
       // {/* <GridItem colSpan={4} bg='#FAF9F6' h={"57vh"} overflowY={"scroll"} sx={{'::-webkit-scrollbar':{display:'none'}}}>
       //   <UserField/>  
